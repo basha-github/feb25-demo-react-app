@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Registration() {
+
+const[fullName,setFullName] = useState('');
+
+
+const saveReg = (e:FormDataEvent)=>{
+
+    e.preventDefault();
+    console.log("submit clicked....");
+    console.log("fullname--->"+fullName);
+
+};
+
+const getFullName = (e:any)=>{
+    setFullName(e.target.value);
+}
+
+
+
   return (
     <div>
       <section className="testimonial py-5" id="testimonial">
@@ -24,15 +42,14 @@ export default function Registration() {
             </div>
             <div className="col-md-8 py-5 border">
               <h4 className="pb-4">Please fill with your details</h4>
-              <form>
+              <form onSubmit={saveReg}>
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <input
-                      id="Full Name"
-                      name="Full Name"
                       placeholder="Full Name"
                       className="form-control"
                       type="text"
+                      onChange={getFullName}
                     />
                   </div>
                   <br></br>
@@ -64,7 +81,7 @@ export default function Registration() {
                 </div>
                 <br></br>
                 <div className="form-row">
-                  <button type="button" className="btn btn-danger">
+                  <button type="submit" className="btn btn-danger">
                     Submit
                   </button>
                 </div>
