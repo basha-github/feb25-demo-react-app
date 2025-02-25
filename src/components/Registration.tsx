@@ -1,23 +1,32 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 export default function Registration() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobileNo, setMobileNo] = useState("");
 
-const[fullName,setFullName] = useState('');
-
-
-const saveReg = (e:FormDataEvent)=>{
-
+  const saveReg = (e: FormDataEvent) => {
     e.preventDefault();
     console.log("submit clicked....");
-    console.log("fullname--->"+fullName);
+    console.log("fullname--->" + fullName);
 
-};
+    const userjson = {  email,fullName, mobileNo };
 
-const getFullName = (e:any)=>{
+    axios.post("http://localhost:8080/basha/add/user", userjson).then((res) => {
+      console.log("res--->" + res.data);
+    });
+  };
+
+  const getFullName = (e: any) => {
     setFullName(e.target.value);
-}
-
-
+  };
+  const getMobileNo = (e: any) => {
+    setMobileNo(e.target.value);
+  };
+  const getEmail = (e: any) => {
+    setEmail(e.target.value);
+  };
 
   return (
     <div>
@@ -59,6 +68,7 @@ const getFullName = (e:any)=>{
                       className="form-control"
                       id="inputEmail4"
                       placeholder="Email"
+                      onChange={getEmail}
                     />
                   </div>
                 </div>
@@ -71,6 +81,7 @@ const getFullName = (e:any)=>{
                       placeholder="Mobile No."
                       className="form-control"
                       type="text"
+                      onChange={getMobileNo}
                     />
                   </div>
                 </div>
